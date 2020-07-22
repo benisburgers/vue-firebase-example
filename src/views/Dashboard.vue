@@ -1,5 +1,12 @@
 <template>
   <div id="dashboard">
+    <transition name="fade">
+      <CommentModal
+        v-if="showCommentModal"
+        :post="selectedPost"
+        @close="toggleCommentModal()"
+      ></CommentModal>
+    </transition>
     <section>
       <div class="col1">
         <div class="profile">
@@ -28,7 +35,9 @@
             <p>{{ post.content | trimLength }}</p>
             <ul>
               <li>
-                <a>comments {{ post.comments }}</a>
+                <a @click="toggleCommentModal(post)"
+                  >comments {{ post.comments }}</a
+                >
               </li>
               <li>
                 <a>likes {{ post.likes }}</a>
@@ -50,6 +59,7 @@
 <script>
 import { mapState } from "vuex";
 import moment from "moment";
+import CommentModal from "@/components/CommentModal";
 
 export default {
   data() {
@@ -57,7 +67,12 @@ export default {
       post: {
         content: "",
       },
+      showCommentModal: false,
+      selectedPost: {},
     };
+  },
+  components: {
+    CommentModal,
   },
   computed: {
     ...mapState(["userProfile", "posts"]),
@@ -66,6 +81,16 @@ export default {
     createPost() {
       this.$store.dispatch("createPost", { content: this.post.content });
       this.post.content = "";
+    },
+    toggleCommentModal(post) {
+      this.showCommentModal = !this.showCommentModal;
+
+      // if opening modal set selectedPost, else clear
+      if (this.showCommentModal) {
+        this.selectedPost = post;
+      } else {
+        this.selectedPost = {};
+      }
     },
   },
   filters: {
