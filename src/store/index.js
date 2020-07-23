@@ -18,10 +18,24 @@ fb.postsCollection.orderBy("createdOn", "desc").onSnapshot((snapshot) => {
   store.commit("setPosts", postsArray);
 });
 
+fb.fl_contentCollection.onSnapshot((snapshot) => {
+  let proceduresArray = [];
+
+  snapshot.forEach((doc) => {
+    let procedure = doc.data();
+    procedure.id = doc.id;
+
+    proceduresArray.push(procedure);
+  });
+
+  store.commit("setProcedures", proceduresArray);
+});
+
 const store = new Vuex.Store({
   state: {
     userProfile: {},
     posts: [],
+    procedures: [],
   },
   mutations: {
     setUserProfile(state, val) {
@@ -29,6 +43,9 @@ const store = new Vuex.Store({
     },
     setPosts(state, val) {
       state.posts = val;
+    },
+    setProcedures(state, val) {
+      state.procedures = val;
     },
   },
   actions: {

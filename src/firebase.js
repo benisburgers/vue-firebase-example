@@ -10,7 +10,7 @@ const firebaseConfig = {
   projectId: "vue-firebase-c6b69",
   storageBucket: "vue-firebase-c6b69.appspot.com",
   messagingSenderId: "217408786668",
-  appId: "1:217408786668:web:b8abb5fa9b6623e1b955c9"
+  appId: "1:217408786668:web:b8abb5fa9b6623e1b955c9",
 };
 firebase.initializeApp(firebaseConfig);
 
@@ -23,6 +23,7 @@ const usersCollection = db.collection("users");
 const postsCollection = db.collection("posts");
 const commentsCollection = db.collection("comments");
 const likesCollection = db.collection("likes");
+const fl_contentCollection = db.collection("fl_content");
 
 // export utils/refs
 export {
@@ -31,5 +32,6 @@ export {
   usersCollection,
   postsCollection,
   commentsCollection,
-  likesCollection
+  likesCollection,
+  fl_contentCollection,
 };

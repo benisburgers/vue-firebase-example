@@ -13,6 +13,9 @@
             <router-link to="/settings">Settings</router-link>
           </li>
           <li>
+            <router-link to="/procedures">Procedures</router-link>
+          </li>
+          <li>
             <a @click="logout()">logout</a>
           </li>
         </ul>
@@ -26,7 +29,7 @@ export default {
   methods: {
     logout() {
       this.$store.dispatch("logout");
-    }
-  }
+    },
+  },
 };
 </script>

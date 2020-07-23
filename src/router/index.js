@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Dashboard from "../views/Dashboard.vue";
+import Procedures from "../views/Procedures.vue";
 import { auth } from "../firebase";
 
 Vue.use(VueRouter);
@@ -10,6 +11,14 @@ const routes = [
     path: "/",
     name: "Dashboard",
     component: Dashboard,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/procedures",
+    name: "Procedures",
+    component: Procedures,
     meta: {
       requiresAuth: true,
     },
